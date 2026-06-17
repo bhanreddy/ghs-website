@@ -9,12 +9,14 @@ export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true });
 
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 600], [0, -120]);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacityFade = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   const taglineLines = [
@@ -29,55 +31,12 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Animated gradient mesh background */}
-      <div className="absolute inset-0 z-0">
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-ribbon animate-gradient-shift opacity-90" />
-
-        {/* Animated blobs */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{
-              x: [0, 100, -50, 0],
-              y: [0, -80, 60, 0],
-              scale: [1, 1.2, 0.9, 1],
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-brand-secondary/15 blur-[100px]"
-          />
-          <motion.div
-            animate={{
-              x: [0, -80, 100, 0],
-              y: [0, 100, -60, 0],
-              scale: [1, 0.8, 1.3, 1],
-            }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-brand-accent/10 blur-[120px]"
-          />
-          <motion.div
-            animate={{
-              x: [0, 60, -100, 0],
-              y: [0, -100, 50, 0],
-            }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-white/5 blur-[80px]"
-          />
-        </div>
-
-        {/* Subtle grid pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-      </div>
+      {/* WebGL-free animated mesh gradient background */}
+      <div className="absolute inset-0 z-0 hero-bg" />
 
       {/* Content */}
       <motion.div style={{ opacity: opacityFade }} className="relative z-10 section-container text-center">
-        <motion.div style={{ y: parallaxY }}>
+        <motion.div style={{ y }}>
           {/* VVM Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -202,6 +161,16 @@ export default function Hero() {
 
       {/* Bottom gradient fade to page bg */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-bg to-transparent z-10 pointer-events-none" />
+
+      {/* Noise overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none z-[2] opacity-[0.035]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          backgroundSize: '200px 200px',
+        }}
+      />
     </section>
   );
 }

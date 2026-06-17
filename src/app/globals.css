@@ -328,3 +328,42 @@ p {
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
 }
+
+/* ============================================================
+   HERO ANIMATED MESH GRADIENT (WEBGL-FREE)
+   ============================================================ */
+
+@property --hero-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 135deg;
+}
+@property --hero-stop1 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+@property --hero-stop2 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 40%;
+}
+
+.hero-bg {
+  background: conic-gradient(
+    from var(--hero-angle) at 30% 50%,
+    #3D1266 var(--hero-stop1),
+    #6B2FA0 var(--hero-stop2),
+    #7B2FB5 65%,
+    #F9A825 90%,
+    #3D1266 100%
+  );
+  animation: heroMesh 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroMesh {
+  0%   { --hero-angle: 135deg; --hero-stop1: 0%;  --hero-stop2: 35%; }
+  33%  { --hero-angle: 160deg; --hero-stop1: 5%;  --hero-stop2: 45%; }
+  66%  { --hero-angle: 115deg; --hero-stop1: 2%;  --hero-stop2: 38%; }
+  100% { --hero-angle: 150deg; --hero-stop1: 8%;  --hero-stop2: 50%; }
+}
