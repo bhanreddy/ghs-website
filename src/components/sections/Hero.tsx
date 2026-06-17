@@ -17,7 +17,10 @@ export default function Hero() {
   const parallaxY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacityFade = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  const taglineWords = "Build Your Own Identity".split(" ");
+  const taglineLines = [
+    { words: ["Build", "Your"], startIdx: 0 },
+    { words: ["Own", "Identity"], startIdx: 2 },
+  ];
   const mottoWords = ["Thought", "•", "Action", "•", "Progress"];
 
   return (
@@ -87,32 +90,39 @@ export default function Hero() {
           </motion.div>
 
           {/* Tagline — word-by-word reveal */}
-          <h1 className="mb-6">
+          <h1 className="mb-6 hero-headline">
             <span className="sr-only">Build Your Own Identity</span>
-            <span aria-hidden="true" className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-              {taglineWords.map((word, i) => (
-                <span key={i} className="overflow-hidden inline-block">
-                  <motion.span
-                    initial={{ y: "110%", opacity: 0, rotateX: -40 }}
-                    animate={
-                      isInView
-                        ? {
-                            y: "0%",
-                            opacity: 1,
-                            rotateX: 0,
-                            transition: {
-                              duration: 0.8,
-                              delay: 0.5 + i * 0.12,
-                              ease: [0.16, 1, 0.3, 1],
-                            },
+            <span aria-hidden="true" className="block text-center">
+              {taglineLines.map((line, lineIdx) => (
+                <span key={lineIdx} className="block overflow-hidden py-1">
+                  {line.words.map((word, wordIdx) => {
+                    const i = line.startIdx + wordIdx;
+                    return (
+                      <span key={wordIdx} className="overflow-hidden inline-block mx-2 md:mx-3">
+                        <motion.span
+                          initial={{ y: "110%", opacity: 0, rotateX: -40 }}
+                          animate={
+                            isInView
+                              ? {
+                                  y: "0%",
+                                  opacity: 1,
+                                  rotateX: 0,
+                                  transition: {
+                                    duration: 0.8,
+                                    delay: 0.5 + i * 0.12,
+                                    ease: [0.16, 1, 0.3, 1],
+                                  },
+                                }
+                              : {}
                           }
-                        : {}
-                    }
-                    className="inline-block text-white font-display font-extrabold"
-                    style={{ fontSize: "clamp(2.8rem, 7vw, 5.5rem)", lineHeight: 1.05 }}
-                  >
-                    {word}
-                  </motion.span>
+                          className="inline-block text-white font-display font-extrabold"
+                          style={{ fontSize: "clamp(2.8rem, 7vw, 5.5rem)" }}
+                        >
+                          {word}
+                        </motion.span>
+                      </span>
+                    );
+                  })}
                 </span>
               ))}
             </span>

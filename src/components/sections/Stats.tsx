@@ -53,10 +53,10 @@ function AnimatedCounter({
   }, [shouldAnimate, numericValue, isNumeric, duration]);
 
   if (!isNumeric) {
-    return <span>{value}{suffix}</span>;
+    return <span><span className="counter-number">{value}</span>{suffix}</span>;
   }
 
-  return <span>{count}{suffix}</span>;
+  return <span><span className="counter-number">{count}</span>{suffix}</span>;
 }
 
 export default function Stats() {
@@ -79,7 +79,7 @@ export default function Stats() {
             transition={{ duration: 0.6 }}
             className="text-center mb-14"
           >
-            <span className="inline-block text-brand-accent font-display font-semibold text-sm uppercase tracking-[0.2em] mb-3">
+            <span className="inline-block text-brand-accent section-eyebrow mb-3">
               By the Numbers
             </span>
             <h2 className="text-white">

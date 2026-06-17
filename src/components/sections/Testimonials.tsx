@@ -103,7 +103,7 @@ export default function Testimonials() {
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="text-center"
               >
-                <p className="text-brand-text font-body text-lg md:text-xl leading-relaxed italic mb-8">
+                <p className="text-brand-text pull-quote mb-8">
                   &ldquo;{testimonials[current].quote}&rdquo;
                 </p>
 

@@ -20,7 +20,7 @@ export default function AboutVVM() {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="inline-block text-brand-secondary font-display font-semibold text-sm uppercase tracking-[0.2em] mb-3">
+              <span className="inline-block text-brand-secondary section-eyebrow mb-3">
                 Who We Are
               </span>
               <h2 className="text-brand-text-strong mb-6">

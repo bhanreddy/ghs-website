@@ -75,6 +75,7 @@
   /* Fonts */
   --font-display: var(--font-outfit);
   --font-body: var(--font-inter);
+  --font-mono: var(--font-mono);
 
   /* Easing */
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
@@ -101,10 +102,13 @@
    BASE STYLES
    ============================================================ */
 
-html {
-  scroll-behavior: auto; /* Lenis handles smooth scroll */
+* {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
 }
 
 body {
@@ -128,8 +132,36 @@ h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; }
 h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; }
 
 p {
-  line-height: 1.7;
+  line-height: 1.75;
   font-size: clamp(1rem, 1.1vw, 1.125rem);
+}
+
+/* Typography Elevation Helpers */
+.hero-headline {
+  font-kerning: normal;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  font-feature-settings: "smcp" 0;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.pull-quote {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.counter-number {
+  font-variant-numeric: tabular-nums lining-nums;
 }
 
 /* --- Selection --- */

@@ -36,7 +36,7 @@ export default function SectionHeading({
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-block text-brand-secondary font-display font-semibold text-sm uppercase tracking-[0.2em] mb-3"
+          className="inline-block text-brand-secondary section-eyebrow mb-3"
         >
           {label}
         </motion.span>
