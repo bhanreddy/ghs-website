@@ -24,39 +24,65 @@ function AnimatedCounter({
   shouldAnimate: boolean;
 }) {
   const [count, setCount] = useState(0);
+  const [done, setDone] = useState(false);
   const numericValue = parseInt(value, 10);
   const isNumeric = !isNaN(numericValue);
 
   useEffect(() => {
     if (!shouldAnimate || !isNumeric) return;
 
-    let start = 0;
     const end = numericValue;
     const startTime = performance.now();
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    function easeOutExpo(t: number): number {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
 
     function animate(currentTime: number) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-
-      // Ease out expo
-      const easedProgress = 1 - Math.pow(1 - progress, 4);
-      const current = Math.floor(easedProgress * end);
+      const easedProgress = easeOutExpo(progress);
+      const current = Math.round(easedProgress * end);
 
       setCount(current);
 
       if (progress < 1) {
         requestAnimationFrame(animate);
+      } else {
+        setDone(true);
+        timeoutId = setTimeout(() => {
+          setDone(false);
+        }, 600);
       }
     }
 
     requestAnimationFrame(animate);
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [shouldAnimate, numericValue, isNumeric, duration]);
 
   if (!isNumeric) {
     return <span><span className="counter-number">{value}</span>{suffix}</span>;
   }
 
-  return <span><span className="counter-number">{count}</span>{suffix}</span>;
+  return (
+    <span>
+      <span
+        className="counter-number transition-all duration-300"
+        style={{
+          textShadow: done
+            ? "0 0 24px rgba(249, 168, 37, 0.6)"
+            : "none",
+        }}
+      >
+        {count}
+      </span>
+      {suffix}
+    </span>
+  );
 }
 
 export default function Stats() {
