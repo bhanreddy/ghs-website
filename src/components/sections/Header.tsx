@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/components/providers/ThemeProvider";
+import { useScrollVelocity } from "@/components/providers/SmoothScrollProvider";
 import VVMBadge from "@/components/ui/VVMBadge";
 import siteConfig from "@/content/siteConfig.json";
 
@@ -13,6 +14,9 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const { theme, toggleTheme } = useTheme();
+  
+  const velocity = useScrollVelocity();
+  const skew = Math.max(-4, Math.min(4, velocity * 0.3));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,7 +72,11 @@ export default function Header() {
             <div className="relative w-10 h-10 rounded-full bg-ribbon flex items-center justify-center shrink-0">
               <span className="text-white font-display font-bold text-sm">G</span>
             </div>
-            <div className="hidden sm:flex flex-col leading-tight">
+            <motion.div
+              animate={{ skewX: skew }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="hidden sm:flex flex-col leading-tight origin-left"
+            >
               <motion.span
                 initial={{ clipPath: "inset(100% 0 0 0)" }}
                 animate={{ clipPath: "inset(0% 0 0 0)" }}
@@ -85,7 +93,7 @@ export default function Header() {
               >
                 High School, Maddur
               </motion.span>
-            </div>
+            </motion.div>
             <VVMBadge size="sm" showLabel={false} className="hidden sm:flex" />
           </a>
 

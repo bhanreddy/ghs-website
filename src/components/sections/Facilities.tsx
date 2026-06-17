@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import facilitiesData from "@/content/facilities.json";
+import { useScrollVelocity } from "@/components/providers/SmoothScrollProvider";
 
 const iconMap: Record<string, React.ElementType> = {
   FlaskConical,
@@ -29,6 +30,9 @@ const iconMap: Record<string, React.ElementType> = {
 export default function Facilities() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  
+  const velocity = useScrollVelocity();
+  const scale = 1 + Math.abs(velocity) * 0.002;
 
   // Bento grid layout — CSS grid areas for asymmetric layout
   const gridAreaMap: Record<string, string> = {
@@ -81,18 +85,25 @@ export default function Facilities() {
                   gridColumn: colSpan,
                 }}
               >
-                {/* Background placeholder with gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 via-brand-surface-elevated to-brand-accent/10 transition-transform duration-700 ease-[var(--ease-smooth)] group-hover:scale-110" />
+                {/* Background placeholder wrapper for scroll velocity scale */}
+                <motion.div
+                  animate={{ scaleY: scale }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  className="absolute inset-0 z-0 origin-center"
+                >
+                  {/* Background placeholder with gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 via-brand-surface-elevated to-brand-accent/10 transition-transform duration-700 ease-[var(--ease-smooth)] group-hover:scale-110" />
 
-                {/* Pattern overlay */}
-                <div
-                  className="absolute inset-0 opacity-[0.04]"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)",
-                    backgroundSize: "24px 24px",
-                  }}
-                />
+                  {/* Pattern overlay */}
+                  <div
+                    className="absolute inset-0 opacity-[0.04]"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)",
+                      backgroundSize: "24px 24px",
+                    }}
+                  />
+                </motion.div>
 
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-primary-dark/90 via-brand-primary-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

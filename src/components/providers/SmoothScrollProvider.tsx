@@ -1,7 +1,13 @@
 "use client";
 
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState, createContext, useContext } from "react";
 import Lenis from "lenis";
+
+const ScrollVelocityContext = createContext<number>(0);
+
+export function useScrollVelocity() {
+  return useContext(ScrollVelocityContext);
+}
 
 interface SmoothScrollProviderProps {
   children: ReactNode;
@@ -9,6 +15,7 @@ interface SmoothScrollProviderProps {
 
 export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
+  const [velocity, setVelocity] = useState(0);
 
   useEffect(() => {
     // Respect user preference for reduced motion
@@ -24,18 +31,31 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
 
     lenisRef.current = lenis;
 
+    const onScroll = ({ velocity: v }: { velocity: number }) => {
+      setVelocity(v);
+    };
+
+    lenis.on("scroll", onScroll);
+
+    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      lenis.off("scroll", onScroll);
       lenis.destroy();
+      cancelAnimationFrame(rafId);
       lenisRef.current = null;
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <ScrollVelocityContext.Provider value={velocity}>
+      {children}
+    </ScrollVelocityContext.Provider>
+  );
 }
