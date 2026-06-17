@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import VVMBadge from "@/components/ui/VVMBadge";
+import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 import leadershipData from "@/content/leadership.json";
 
 export default function AboutVVM() {
@@ -11,6 +12,7 @@ export default function AboutVVM() {
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-brand-surface">
+      <NoiseOverlay />
       <div className="section-container section-padding">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left: Content */}

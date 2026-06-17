@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { BookOpen, FlaskConical, GraduationCap, Check } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 import academicsData from "@/content/academics.json";
 import siteConfig from "@/content/siteConfig.json";
 
@@ -22,6 +23,7 @@ export default function Academics() {
 
   return (
     <section ref={sectionRef} id="academics" className="section-padding bg-brand-bg relative">
+      <NoiseOverlay />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand-primary/3 blur-[120px]" />
       </div>

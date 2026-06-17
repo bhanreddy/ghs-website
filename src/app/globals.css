@@ -31,6 +31,7 @@
   --color-success: #16A34A;
   --color-error: #DC2626;
   --color-warning: #F59E0B;
+  --noise-opacity: 0.025;
 }
 
 /* --- Dark Mode --- */
@@ -53,6 +54,7 @@
   --ribbon-2: #B57EDC;
   --ribbon-3: #9B59B6;
   --ribbon-4: #D4A5F5;
+  --noise-opacity: 0.05;
 }
 
 /* --- Tailwind v4 Theme Tokens --- */
@@ -190,9 +192,38 @@ p {
 
 /* --- Focus --- */
 *:focus-visible {
-  outline: 2px solid var(--brand-primary);
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: 2px solid #F9A825 !important;
+  outline-offset: 3px !important;
+  border-radius: 4px !important;
+}
+
+/* --- Button Press Depth --- */
+button:active, .btn:active, a.btn:active, [role="button"]:active {
+  transform: scale(0.97) translateY(1px) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+  transition: transform 80ms ease, box-shadow 80ms ease !important;
+}
+
+/* --- Link Underline Animations --- */
+.animated-link {
+  position: relative;
+  text-decoration: none;
+}
+.animated-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.animated-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 /* --- Reduced Motion --- */
@@ -310,23 +341,39 @@ p {
 
 .animate-gradient-shift {
   background-size: 300% 300%;
-  animation: gradient-shift 8s ease infinite;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-gradient-shift {
+    animation: gradient-shift 8s ease infinite;
+  }
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+.animate-float {}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
+.animate-pulse-glow {}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
 }
 
-.animate-scroll-cue {
-  animation: scroll-cue 2s ease-in-out infinite;
+.animate-scroll-cue {}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-scroll-cue {
+    animation: scroll-cue 2s ease-in-out infinite;
+  }
 }
 
-.animate-spin-slow {
-  animation: spin-slow 20s linear infinite;
+.animate-spin-slow {}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
 }
 
 /* ============================================================
@@ -358,7 +405,11 @@ p {
     #F9A825 90%,
     #3D1266 100%
   );
-  animation: heroMesh 12s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-bg {
+    animation: heroMesh 12s ease-in-out infinite alternate;
+  }
 }
 
 @keyframes heroMesh {
@@ -380,10 +431,14 @@ p {
 
 .vvm-badge-rotating {
   background: conic-gradient(from var(--badge-angle), #F9A825, #6B2FA0, #F9A825);
-  animation: rotateBadge 4s linear infinite;
   padding: 1px; /* the "border" is the background showing through a 1px gap */
   border-radius: 9999px;
   display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .vvm-badge-rotating {
+    animation: rotateBadge 4s linear infinite;
+  }
 }
 
 @keyframes rotateBadge {

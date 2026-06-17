@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import CustomCursor from "@/components/ui/CustomCursor";
+import PageLoader from "@/components/ui/PageLoader";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -70,6 +71,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col antialiased">
         <ThemeProvider>
+          <PageLoader />
           <CustomCursor />
           <SmoothScrollProvider>
             {children}

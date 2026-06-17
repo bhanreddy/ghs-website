@@ -52,7 +52,7 @@ export default function Footer() {
                     href={link.href}
                     className="text-brand-text-muted hover:text-brand-primary text-sm font-body transition-colors duration-300 inline-flex items-center gap-1 group"
                   >
-                    {link.label}
+                    <span className="animated-link">{link.label}</span>
                     <ArrowUpRight
                       size={12}
                       className="opacity-0 -translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
@@ -85,7 +85,7 @@ export default function Footer() {
                   className="flex items-center gap-3 text-brand-text-muted hover:text-brand-primary text-sm font-body transition-colors duration-300"
                 >
                   <Phone size={16} className="text-brand-primary shrink-0" />
-                  {siteConfig.contact.phone}
+                  <span className="animated-link">{siteConfig.contact.phone}</span>
                 </a>
               </li>
               <li>
@@ -94,7 +94,7 @@ export default function Footer() {
                   className="flex items-center gap-3 text-brand-text-muted hover:text-brand-primary text-sm font-body transition-colors duration-300"
                 >
                   <Mail size={16} className="text-brand-primary shrink-0" />
-                  {siteConfig.contact.email}
+                  <span className="animated-link">{siteConfig.contact.email}</span>
                 </a>
               </li>
               <li>
@@ -105,7 +105,7 @@ export default function Footer() {
                   className="flex items-center gap-3 text-brand-text-muted hover:text-brand-primary text-sm font-body transition-colors duration-300"
                 >
                   <Globe size={16} className="text-brand-primary shrink-0" />
-                  {siteConfig.contact.website}
+                  <span className="animated-link">{siteConfig.contact.website}</span>
                 </a>
               </li>
             </ul>

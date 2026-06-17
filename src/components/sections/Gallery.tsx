@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 import galleryData from "@/content/gallery.json";
 
 const unsplashFallbacks: Record<string, string[]> = {
@@ -95,6 +96,7 @@ export default function Gallery() {
 
   return (
     <section ref={sectionRef} id="gallery" className="section-padding bg-brand-bg relative">
+      <NoiseOverlay />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-brand-accent/5 blur-[120px]" />
       </div>

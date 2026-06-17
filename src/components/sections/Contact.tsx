@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle, MapPin, Phone, Mail, Globe } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 import siteConfig from "@/content/siteConfig.json";
 
 interface FormData {
@@ -30,6 +31,7 @@ export default function Contact() {
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [focused, setFocused] = useState<Record<string, boolean>>({});
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
@@ -47,7 +49,6 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      // Placeholder submit — no real backend
       setSubmitted(true);
     }
   };
@@ -60,10 +61,11 @@ export default function Contact() {
   };
 
   const inputClasses =
-    "w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-brand-text font-body text-sm focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all duration-300 placeholder:text-brand-text-muted/50";
+    "w-full px-4 pt-6 pb-2 rounded-xl bg-brand-surface border border-brand-border text-brand-text font-body text-sm focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all duration-300";
 
   return (
     <section ref={sectionRef} id="contact" className="section-padding bg-brand-surface relative">
+      <NoiseOverlay />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-0 w-[500px] h-[500px] rounded-full bg-brand-primary/5 blur-[120px]" />
       </div>
@@ -121,96 +123,204 @@ export default function Contact() {
                 >
                   <div className="space-y-5">
                     {/* Name */}
-                    <div>
-                      <label htmlFor="contact-name" className="block text-brand-text font-body font-medium text-sm mb-1.5">
-                        Full Name <span className="text-red-500">*</span>
-                      </label>
+                    <motion.div
+                      animate={errors.name ? { x: [0, -8, 8, -8, 8, -4, 4, 0] } : {}}
+                      transition={{ duration: 0.4 }}
+                      className="relative mt-2"
+                    >
                       <input
                         id="contact-name"
                         type="text"
                         value={formData.name}
+                        onFocus={() => setFocused((prev) => ({ ...prev, name: true }))}
+                        onBlur={() => setFocused((prev) => ({ ...prev, name: false }))}
                         onChange={(e) => handleChange("name", e.target.value)}
-                        placeholder="Enter your full name"
-                        className={`${inputClasses} ${errors.name ? "border-red-400 focus:border-red-400 focus:ring-red-200" : ""}`}
+                        className={`${inputClasses} ${
+                          errors.name ? "border-[#D32F2F] focus:border-[#D32F2F] focus:ring-[#D32F2F]/20" : ""
+                        }`}
                       />
+                      <label
+                        htmlFor="contact-name"
+                        className={`absolute left-4 pointer-events-none transition-all duration-300 font-body ${
+                          focused.name || formData.name
+                            ? "top-1 text-xs text-brand-primary font-bold"
+                            : "top-1/2 -translate-y-1/2 text-sm text-brand-text-muted/70"
+                        }`}
+                      >
+                        Full Name <span className="text-red-500">*</span>
+                      </label>
+                      <div
+                        className={`absolute bottom-0 left-0 right-0 h-[2px] bg-brand-primary origin-left transition-transform duration-300 pointer-events-none ${
+                          focused.name ? "scale-x-100" : "scale-x-0"
+                        }`}
+                      />
+                      <AnimatePresence>
+                        {formData.name.trim().length >= 2 && !errors.name && (
+                          <motion.span
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-accent font-bold pointer-events-none text-lg"
+                          >
+                            ✓
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
                       {errors.name && (
                         <motion.p
                           initial={{ opacity: 0, y: -4 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="text-red-500 text-xs font-body mt-1"
+                          className="text-red-500 text-xs font-body mt-1 pl-1"
                         >
                           {errors.name}
                         </motion.p>
                       )}
-                    </div>
+                    </motion.div>
 
                     {/* Phone */}
-                    <div>
-                      <label htmlFor="contact-phone" className="block text-brand-text font-body font-medium text-sm mb-1.5">
-                        Phone Number <span className="text-red-500">*</span>
-                      </label>
+                    <motion.div
+                      animate={errors.phone ? { x: [0, -8, 8, -8, 8, -4, 4, 0] } : {}}
+                      transition={{ duration: 0.4 }}
+                      className="relative"
+                    >
                       <input
                         id="contact-phone"
                         type="tel"
                         value={formData.phone}
+                        onFocus={() => setFocused((prev) => ({ ...prev, phone: true }))}
+                        onBlur={() => setFocused((prev) => ({ ...prev, phone: false }))}
                         onChange={(e) => handleChange("phone", e.target.value)}
-                        placeholder="Enter your 10-digit phone number"
-                        className={`${inputClasses} ${errors.phone ? "border-red-400 focus:border-red-400 focus:ring-red-200" : ""}`}
+                        className={`${inputClasses} ${
+                          errors.phone ? "border-[#D32F2F] focus:border-[#D32F2F] focus:ring-[#D32F2F]/20" : ""
+                        }`}
                       />
+                      <label
+                        htmlFor="contact-phone"
+                        className={`absolute left-4 pointer-events-none transition-all duration-300 font-body ${
+                          focused.phone || formData.phone
+                            ? "top-1 text-xs text-brand-primary font-bold"
+                            : "top-1/2 -translate-y-1/2 text-sm text-brand-text-muted/70"
+                        }`}
+                      >
+                        Phone Number <span className="text-red-500">*</span>
+                      </label>
+                      <div
+                        className={`absolute bottom-0 left-0 right-0 h-[2px] bg-brand-primary origin-left transition-transform duration-300 pointer-events-none ${
+                          focused.phone ? "scale-x-100" : "scale-x-0"
+                        }`}
+                      />
+                      <AnimatePresence>
+                        {/^[6-9]\d{9}$/.test(formData.phone.trim()) && !errors.phone && (
+                          <motion.span
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-accent font-bold pointer-events-none text-lg"
+                          >
+                            ✓
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
                       {errors.phone && (
                         <motion.p
                           initial={{ opacity: 0, y: -4 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="text-red-500 text-xs font-body mt-1"
+                          className="text-red-500 text-xs font-body mt-1 pl-1"
                         >
                           {errors.phone}
                         </motion.p>
                       )}
-                    </div>
+                    </motion.div>
 
                     {/* Class Applying For */}
-                    <div>
-                      <label htmlFor="contact-class" className="block text-brand-text font-body font-medium text-sm mb-1.5">
-                        Class Applying For <span className="text-red-500">*</span>
-                      </label>
+                    <motion.div
+                      animate={errors.classApplying ? { x: [0, -8, 8, -8, 8, -4, 4, 0] } : {}}
+                      transition={{ duration: 0.4 }}
+                      className="relative"
+                    >
                       <select
                         id="contact-class"
                         value={formData.classApplying}
+                        onFocus={() => setFocused((prev) => ({ ...prev, classApplying: true }))}
+                        onBlur={() => setFocused((prev) => ({ ...prev, classApplying: false }))}
                         onChange={(e) => handleChange("classApplying", e.target.value)}
-                        className={`${inputClasses} ${errors.classApplying ? "border-red-400" : ""} ${
-                          !formData.classApplying ? "text-brand-text-muted/50" : ""
-                        }`}
+                        className={`${inputClasses} ${
+                          errors.classApplying ? "border-[#D32F2F] focus:border-[#D32F2F] focus:ring-[#D32F2F]/20" : ""
+                        } ${!formData.classApplying ? "text-brand-text-muted/50" : ""}`}
                       >
-                        <option value="">Select a class</option>
+                        <option value="" disabled className="text-brand-text-muted/50"></option>
                         {["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"].map((cls) => (
                           <option key={cls} value={cls}>
                             Class {cls}
                           </option>
                         ))}
                       </select>
+                      <label
+                        htmlFor="contact-class"
+                        className={`absolute left-4 pointer-events-none transition-all duration-300 font-body ${
+                          focused.classApplying || formData.classApplying
+                            ? "top-1 text-xs text-brand-primary font-bold"
+                            : "top-1/2 -translate-y-1/2 text-sm text-brand-text-muted/70"
+                        }`}
+                      >
+                        Class Applying For <span className="text-red-500">*</span>
+                      </label>
+                      <div
+                        className={`absolute bottom-0 left-0 right-0 h-[2px] bg-brand-primary origin-left transition-transform duration-300 pointer-events-none ${
+                          focused.classApplying ? "scale-x-100" : "scale-x-0"
+                        }`}
+                      />
+                      <AnimatePresence>
+                        {formData.classApplying && !errors.classApplying && (
+                          <motion.span
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                            className="absolute right-8 top-1/2 -translate-y-1/2 text-brand-accent font-bold pointer-events-none text-lg"
+                          >
+                            ✓
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
                       {errors.classApplying && (
                         <motion.p
                           initial={{ opacity: 0, y: -4 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="text-red-500 text-xs font-body mt-1"
+                          className="text-red-500 text-xs font-body mt-1 pl-1"
                         >
                           {errors.classApplying}
                         </motion.p>
                       )}
-                    </div>
+                    </motion.div>
 
                     {/* Message */}
-                    <div>
-                      <label htmlFor="contact-message" className="block text-brand-text font-body font-medium text-sm mb-1.5">
-                        Message <span className="text-brand-text-muted text-xs">(optional)</span>
-                      </label>
+                    <div className="relative">
                       <textarea
                         id="contact-message"
                         value={formData.message}
+                        onFocus={() => setFocused((prev) => ({ ...prev, message: true }))}
+                        onBlur={() => setFocused((prev) => ({ ...prev, message: false }))}
                         onChange={(e) => handleChange("message", e.target.value)}
-                        placeholder="Any questions or additional information..."
                         rows={4}
                         className={`${inputClasses} resize-none`}
+                      />
+                      <label
+                        htmlFor="contact-message"
+                        className={`absolute left-4 pointer-events-none transition-all duration-300 font-body ${
+                          focused.message || formData.message
+                            ? "top-1 text-xs text-brand-primary font-bold"
+                            : "top-4 text-sm text-brand-text-muted/70"
+                        }`}
+                      >
+                        Message <span className="text-brand-text-muted text-xs">(optional)</span>
+                      </label>
+                      <div
+                        className={`absolute bottom-0 left-0 right-0 h-[2px] bg-brand-primary origin-left transition-transform duration-300 pointer-events-none ${
+                          focused.message ? "scale-x-100" : "scale-x-0"
+                        }`}
                       />
                     </div>
 
@@ -278,7 +388,7 @@ export default function Contact() {
                           href={item.href}
                           className="text-brand-text font-body text-sm hover:text-brand-primary transition-colors duration-300"
                         >
-                          {item.content}
+                          <span className="animated-link">{item.content}</span>
                         </a>
                       ) : (
                         <p className="text-brand-text font-body text-sm">{item.content}</p>

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ClipboardList, FileText, BookCheck, UserCheck } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 
 const steps = [
   {
@@ -34,6 +35,7 @@ export default function Admissions() {
 
   return (
     <section ref={sectionRef} className="section-padding bg-brand-bg relative">
+      <NoiseOverlay />
       <div className="section-container">
         <SectionHeading
           label="Join Us"

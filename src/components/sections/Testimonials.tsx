@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote, User } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 import testimonialData from "@/content/testimonials.json";
 
 export default function Testimonials() {
@@ -71,6 +72,7 @@ export default function Testimonials() {
 
   return (
     <section ref={sectionRef} className="section-padding bg-brand-surface relative">
+      <NoiseOverlay />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-brand-primary/5 blur-[120px]" />
       </div>

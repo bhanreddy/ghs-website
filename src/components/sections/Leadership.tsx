@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Quote } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import TiltCard from "@/components/ui/TiltCard";
+import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 import leadershipData from "@/content/leadership.json";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +15,7 @@ export default function Leadership() {
 
   return (
     <section ref={sectionRef} id="about" className="section-padding bg-brand-bg relative">
+      <NoiseOverlay />
       {/* Decorative background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-brand-primary/5 blur-[100px]" />

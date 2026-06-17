@@ -13,6 +13,7 @@ import {
   Palette,
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 import facilitiesData from "@/content/facilities.json";
 import { useScrollVelocity } from "@/components/providers/SmoothScrollProvider";
 
@@ -48,6 +49,7 @@ export default function Facilities() {
 
   return (
     <section ref={sectionRef} id="campus" className="section-padding bg-brand-surface relative">
+      <NoiseOverlay />
       <div className="section-container">
         <SectionHeading
           label="Campus Life"
