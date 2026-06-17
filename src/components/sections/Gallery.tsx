@@ -115,6 +115,7 @@ export default function Gallery() {
                 className={`break-inside-avoid group cursor-pointer rounded-2xl overflow-hidden relative ${
                   heightClasses[i % heightClasses.length]
                 } bg-brand-surface-elevated border border-brand-border hover:border-brand-primary/30 transition-colors duration-300`}
+                data-cursor="gallery"
               >
                 {/* Placeholder content */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-4">

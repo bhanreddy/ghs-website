@@ -50,6 +50,7 @@ export default function Leadership() {
               <TiltCard
                 className="bg-brand-surface rounded-2xl border border-brand-border p-8 h-full group hover:border-brand-primary/30 transition-colors duration-500"
                 tiltIntensity={8}
+                data-cursor="drag"
               >
                 {/* Avatar placeholder */}
                 <div className="flex flex-col items-center text-center">

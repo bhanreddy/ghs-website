@@ -1,12 +1,11 @@
 "use client";
 
 import { useRef, useState, ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface TiltCardProps {
-  children: ReactNode;
-  className?: string;
+interface TiltCardProps extends Omit<HTMLMotionProps<"div">, "children"> {
+  children?: ReactNode;
   tiltIntensity?: number;
   glare?: boolean;
 }
@@ -16,6 +15,7 @@ export default function TiltCard({
   className,
   tiltIntensity = 10,
   glare = true,
+  ...props
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
@@ -53,6 +53,7 @@ export default function TiltCard({
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{ perspective: 1000, transformStyle: "preserve-3d" }}
       className={cn("relative overflow-hidden", className)}
+      {...props}
     >
       {children}
 
