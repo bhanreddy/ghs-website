@@ -66,7 +66,15 @@ export default function Stats() {
   return (
     <section ref={sectionRef} id="achievements" className="relative overflow-hidden">
       {/* Gradient background */}
-      <div className="bg-ribbon py-20 md:py-28 relative">
+      <div className="bg-ribbon py-20 md:py-28 relative overflow-hidden">
+        {/* Section number watermark */}
+        <span
+          aria-hidden="true"
+          className="absolute top-6 right-8 font-display font-bold text-[8rem] leading-none text-white/[0.04] select-none pointer-events-none"
+        >
+          07
+        </span>
+
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-white/5 blur-[100px]" />
           <div className="absolute bottom-0 right-1/3 w-72 h-72 rounded-full bg-brand-accent/10 blur-[80px]" />

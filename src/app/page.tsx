@@ -10,6 +10,7 @@ import Testimonials from "@/components/sections/Testimonials";
 import Admissions from "@/components/sections/Admissions";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
+import DiagonalDivider from "@/components/ui/DiagonalDivider";
 
 export default function Home() {
   return (
@@ -19,8 +20,10 @@ export default function Home() {
         <Hero />
         <Leadership />
         <AboutVVM />
+        <DiagonalDivider fromColor="var(--brand-surface)" toColor="var(--brand-bg)" direction="right" />
         <Academics />
         <Facilities />
+        <DiagonalDivider fromColor="var(--brand-surface)" toColor="var(--brand-bg)" direction="left" />
         <Gallery />
         <Stats />
         <Testimonials />
