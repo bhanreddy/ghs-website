@@ -367,3 +367,35 @@ p {
   66%  { --hero-angle: 115deg; --hero-stop1: 2%;  --hero-stop2: 38%; }
   100% { --hero-angle: 150deg; --hero-stop1: 8%;  --hero-stop2: 50%; }
 }
+
+/* ============================================================
+   VVM BADGE ROTATING BORDER (WEBGL-FREE)
+   ============================================================ */
+
+@property --badge-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.vvm-badge-rotating {
+  background: conic-gradient(from var(--badge-angle), #F9A825, #6B2FA0, #F9A825);
+  animation: rotateBadge 4s linear infinite;
+  padding: 1px; /* the "border" is the background showing through a 1px gap */
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+@keyframes rotateBadge {
+  to { --badge-angle: 360deg; }
+}
+
+.vvm-badge-rotating-inner {
+  background: var(--brand-bg);
+  border-radius: 9999px;
+  padding: 2px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.4s var(--ease-smooth);
+}

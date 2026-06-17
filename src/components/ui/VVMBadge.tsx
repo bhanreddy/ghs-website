@@ -23,18 +23,19 @@ export default function VVMBadge({ size = "md", className, showLabel = true }: V
 
   return (
     <div className={cn("inline-flex items-center gap-1.5", className)}>
-      {/* Rotating seal/crest */}
-      <div className="relative">
-        {/* Outer ring — subtle rotation */}
-        <div
-          className={cn(
-            "rounded-full border-2 border-brand-secondary flex items-center justify-center font-display font-bold text-brand-secondary relative",
-            sizeClasses[size]
-          )}
-        >
-          {/* Decorative ring */}
-          <div className="absolute inset-[-3px] rounded-full border border-brand-accent/40 animate-spin-slow" />
-          <span className="relative z-10">V</span>
+      {/* Rotating seal/crest with conic gradient border */}
+      <div className="vvm-badge-rotating">
+        <div className="vvm-badge-rotating-inner">
+          <div
+            className={cn(
+              "rounded-full border border-brand-secondary/30 flex items-center justify-center font-display font-bold text-brand-secondary relative",
+              sizeClasses[size]
+            )}
+          >
+            {/* Decorative ring */}
+            <div className="absolute inset-[-3px] rounded-full border border-brand-accent/40 animate-spin-slow" />
+            <span className="relative z-10">V</span>
+          </div>
         </div>
       </div>
 

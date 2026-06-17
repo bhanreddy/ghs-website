@@ -11,13 +11,31 @@ import siteConfig from "@/content/siteConfig.json";
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      // Detect active section
+      const sections = siteConfig.navLinks.map((link) => link.href.replace("#", ""));
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -45,35 +63,58 @@ export default function Header() {
       >
         <div className="section-container flex items-center justify-between">
           {/* Logo + Wordmark + VVM Badge */}
-          <a href="#" className="flex items-center gap-3 group">
+          <a href="#" className="flex items-center gap-3 group" data-cursor="hover">
             {/* Logo placeholder — Purple circle with GHS */}
             <div className="relative w-10 h-10 rounded-full bg-ribbon flex items-center justify-center shrink-0">
               <span className="text-white font-display font-bold text-sm">G</span>
             </div>
             <div className="hidden sm:flex flex-col leading-tight">
-              <span className="font-display font-bold text-brand-text-strong text-base tracking-tight group-hover:text-brand-primary transition-colors duration-300">
+              <motion.span
+                initial={{ clipPath: "inset(100% 0 0 0)" }}
+                animate={{ clipPath: "inset(0% 0 0 0)" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                className="font-display font-bold text-brand-text-strong text-base tracking-tight group-hover:text-brand-primary transition-colors duration-300 block"
+              >
                 Geetanjali
-              </span>
-              <span className="text-brand-text-muted text-[11px] font-body">
+              </motion.span>
+              <motion.span
+                initial={{ clipPath: "inset(100% 0 0 0)" }}
+                animate={{ clipPath: "inset(0% 0 0 0)" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+                className="text-brand-text-muted text-[11px] font-body block"
+              >
                 High School, Maddur
-              </span>
+              </motion.span>
             </div>
             <VVMBadge size="sm" showLabel={false} className="hidden sm:flex" />
           </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
-            {siteConfig.navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="relative px-4 py-2 text-sm font-body font-medium text-brand-text hover:text-brand-primary transition-colors duration-300 group"
-              >
-                {link.label}
-                {/* Animated underline */}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-brand-primary group-hover:w-3/4 transition-all duration-300 ease-[var(--ease-smooth)]" />
-              </a>
-            ))}
+            {siteConfig.navLinks.map((link) => {
+              const sectionId = link.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "relative px-4 py-2 text-sm font-body font-medium transition-colors duration-300",
+                    isActive ? "text-brand-primary font-semibold" : "text-brand-text hover:text-brand-primary"
+                  )}
+                  data-cursor="hover"
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      className="absolute -bottom-1 left-0 right-0 h-[3px] bg-brand-accent rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Right side: Theme toggle + Mobile trigger */}
