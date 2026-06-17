@@ -1,10 +1,9 @@
 "use client";
 
 import { useRef, useState, ReactNode } from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface TiltCardProps extends Omit<HTMLMotionProps<"div">, "children"> {
+interface TiltCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   tiltIntensity?: number;
   glare?: boolean;
@@ -18,41 +17,53 @@ export default function TiltCard({
   ...props
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const rotateX = ((e.clientY - centerY) / (rect.height / 2)) * -tiltIntensity;
-    const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * tiltIntensity;
+    const card = cardRef.current;
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    setRotate({ x: rotateX, y: rotateY });
-    setGlarePos({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
-    });
+    // Direct DOM manipulation
+    card.style.transition = "none";
+    card.style.transform = `
+      perspective(600px)
+      rotateY(${x * tiltIntensity}deg)
+      rotateX(${-y * tiltIntensity}deg)
+      scale(1.02)
+    `;
+
+    if (glare) {
+      const glareX = ((e.clientX - rect.left) / rect.width) * 100;
+      const glareY = ((e.clientY - rect.top) / rect.height) * 100;
+      setGlarePos({ x: glareX, y: glareY });
+    }
   };
 
   const handleMouseLeave = () => {
-    setRotate({ x: 0, y: 0 });
+    if (!cardRef.current) return;
+    const card = cardRef.current;
+
+    // Reset with 300ms ease transition
+    card.style.transition = "transform 300ms ease";
+    card.style.transform = `
+      perspective(600px)
+      rotateY(0deg)
+      rotateX(0deg)
+      scale(1)
+    `;
     setGlarePos({ x: 50, y: 50 });
   };
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      animate={{
-        rotateX: rotate.x,
-        rotateY: rotate.y,
-      }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      style={{ perspective: 1000, transformStyle: "preserve-3d" }}
-      className={cn("relative overflow-hidden", className)}
+      style={{ transformStyle: "preserve-3d" }}
+      className={cn("relative overflow-hidden transition-all duration-300", className)}
       {...props}
     >
       {children}
@@ -66,6 +77,6 @@ export default function TiltCard({
           }}
         />
       )}
-    </motion.div>
+    </div>
   );
 }
