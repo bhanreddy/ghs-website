@@ -1,26 +1,298 @@
 @import "tailwindcss";
 
+/* ============================================================
+   DESIGN SYSTEM — Geetanjali High School, Maddur
+   Brand Colors: Purple (#6B2FA0) + Orange/Gold (#F5921B / #F9A825)
+   ============================================================ */
+
+/* --- Light Mode (default) --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-primary: #6B2FA0;
+  --brand-primary-dark: #4A1A75;
+  --brand-primary-light: #9B59B6;
+  --brand-secondary: #F5921B;
+  --brand-accent: #F9A825;
+  --brand-bg: #FAF5FF;
+  --brand-surface: #FFFFFF;
+  --brand-surface-elevated: #F3E8FF;
+  --brand-text-strong: #2D0A4E;
+  --brand-text: #3D1266;
+  --brand-text-muted: #7C5A9B;
+  --brand-border: #E2D0F0;
+  --brand-header-bg: rgba(250, 245, 255, 0.72);
+
+  /* Ribbon gradient stops */
+  --ribbon-1: #3D1266;
+  --ribbon-2: #6B2FA0;
+  --ribbon-3: #7B2FB5;
+  --ribbon-4: #9B59B6;
+
+  /* Functional */
+  --color-success: #16A34A;
+  --color-error: #DC2626;
+  --color-warning: #F59E0B;
 }
 
+/* --- Dark Mode --- */
+[data-theme="dark"] {
+  --brand-primary: #B57EDC;
+  --brand-primary-dark: #9B59B6;
+  --brand-primary-light: #D4A5F5;
+  --brand-secondary: #FFB74D;
+  --brand-accent: #FFD54F;
+  --brand-bg: #1A0A2E;
+  --brand-surface: #2D1B4E;
+  --brand-surface-elevated: #3D2566;
+  --brand-text-strong: #F5F0FF;
+  --brand-text: #E8D5F5;
+  --brand-text-muted: #A78BBF;
+  --brand-border: #4A2D6E;
+  --brand-header-bg: rgba(26, 10, 46, 0.72);
+
+  --ribbon-1: #2D1B4E;
+  --ribbon-2: #B57EDC;
+  --ribbon-3: #9B59B6;
+  --ribbon-4: #D4A5F5;
+}
+
+/* --- Tailwind v4 Theme Tokens --- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-dark: var(--brand-primary-dark);
+  --color-brand-primary-light: var(--brand-primary-light);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-surface-elevated: var(--brand-surface-elevated);
+  --color-brand-text-strong: var(--brand-text-strong);
+  --color-brand-text: var(--brand-text);
+  --color-brand-text-muted: var(--brand-text-muted);
+  --color-brand-border: var(--brand-border);
+  --color-brand-header-bg: var(--brand-header-bg);
+
+  /* Fonts */
+  --font-display: var(--font-outfit);
+  --font-body: var(--font-inter);
+
+  /* Easing */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Animation Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 800ms;
+
+  /* Container */
+  --container-max: 1400px;
+
+  /* Spacing scale extensions */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-30: 7.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--brand-bg);
+  color: var(--brand-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  transition: background-color 0.4s var(--ease-smooth), color 0.4s var(--ease-smooth);
+  overflow-x: hidden;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  color: var(--brand-text-strong);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; }
+h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; }
+
+p {
+  line-height: 1.7;
+  font-size: clamp(1rem, 1.1vw, 1.125rem);
+}
+
+/* --- Selection --- */
+::selection {
+  background-color: var(--brand-primary);
+  color: #fff;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--brand-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-primary);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-primary-dark);
+}
+
+/* --- Focus --- */
+*:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--brand-secondary), var(--brand-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Ribbon gradient backgrounds */
+.bg-ribbon {
+  background: linear-gradient(135deg, var(--ribbon-1), var(--ribbon-2), var(--ribbon-3), var(--ribbon-4));
+}
+
+.bg-ribbon-horizontal {
+  background: linear-gradient(90deg, var(--ribbon-1), var(--ribbon-2), var(--ribbon-3), var(--ribbon-4));
+}
+
+/* Glass effect */
+.glass {
+  background: var(--brand-header-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Section container */
+.section-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    padding-inline: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-container {
+    padding-inline: 4rem;
+  }
+}
+
+/* Section spacing */
+.section-padding {
+  padding-block: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-block: 7rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-padding {
+    padding-block: 9rem;
+  }
+}
+
+/* ============================================================
+   ANIMATIONS — Keyframes
+   ============================================================ */
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes scroll-cue {
+  0% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.3; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-gradient-shift {
+  background-size: 300% 300%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-scroll-cue {
+  animation: scroll-cue 2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
 }

@@ -1,0 +1,29 @@
+{
+  "leaders": [
+    {
+      "id": "principal",
+      "name": "Vijay Kumar",
+      "title": "Principal",
+      "initial": "V",
+      "image": "[PLACEHOLDER: portrait photo — Principal Vijay Kumar]",
+      "quote": "[PLACEHOLDER: 2–3 sentence welcome message from Principal Vijay Kumar about the school's vision for holistic education and building student identity]"
+    },
+    {
+      "id": "correspondent",
+      "name": "Venkataih",
+      "title": "Correspondent",
+      "initial": "V",
+      "image": "[PLACEHOLDER: portrait photo — Correspondent Venkataih]",
+      "quote": "[PLACEHOLDER: 2–3 sentence message from Correspondent Venkataih about the school's commitment to quality education and community values]"
+    },
+    {
+      "id": "vice-principal",
+      "name": "Mahesh",
+      "title": "Vice Principal",
+      "initial": "M",
+      "image": "[PLACEHOLDER: portrait photo — Vice Principal Mahesh]",
+      "quote": "[PLACEHOLDER: 2–3 sentence message from Vice Principal Mahesh about student development and the school's nurturing environment]"
+    }
+  ],
+  "vvmDescription": "[PLACEHOLDER: 2–3 paragraphs about VVM Group — Founded by Vijay Kumar, Venkataih, and Mahesh, VVM is dedicated to providing quality education in the Maddur region. Describe the trust's mission, founding story, and commitment to educational excellence.]"
+}

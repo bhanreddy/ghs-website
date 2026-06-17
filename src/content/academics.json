@@ -1,0 +1,55 @@
+{
+  "gradeBands": [
+    {
+      "id": "primary",
+      "name": "Primary",
+      "grades": "Classes I – V",
+      "icon": "BookOpen",
+      "color": "#F5921B",
+      "description": "[PLACEHOLDER: 2–3 sentences about the primary school program — focus on foundational learning, activity-based education, and nurturing curiosity in young minds]",
+      "subjects": [
+        "English",
+        "Mathematics",
+        "Environmental Science",
+        "Hindi / Telugu",
+        "Art & Craft",
+        "Physical Education"
+      ]
+    },
+    {
+      "id": "middle",
+      "name": "Middle School",
+      "grades": "Classes VI – VIII",
+      "icon": "FlaskConical",
+      "color": "#6B2FA0",
+      "description": "[PLACEHOLDER: 2–3 sentences about the middle school program — focus on broadening academic horizons, introducing science labs, and building critical thinking skills]",
+      "subjects": [
+        "English",
+        "Mathematics",
+        "Science",
+        "Social Science",
+        "Hindi / Telugu",
+        "Computer Science",
+        "Physical Education"
+      ]
+    },
+    {
+      "id": "secondary",
+      "name": "Secondary",
+      "grades": "Classes IX – X",
+      "icon": "GraduationCap",
+      "color": "#F9A825",
+      "description": "[PLACEHOLDER: 2–3 sentences about the secondary program — focus on board exam preparation, career guidance, and all-round development for competitive readiness]",
+      "subjects": [
+        "English",
+        "Mathematics",
+        "Physics",
+        "Chemistry",
+        "Biology",
+        "Social Science",
+        "Hindi / Telugu",
+        "Information Technology"
+      ]
+    }
+  ]
+}

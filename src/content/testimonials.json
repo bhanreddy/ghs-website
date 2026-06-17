@@ -1,0 +1,32 @@
+{
+  "testimonials": [
+    {
+      "id": "t1",
+      "name": "[PLACEHOLDER: parent name]",
+      "role": "Parent",
+      "image": "[PLACEHOLDER: testimonial photo]",
+      "quote": "[PLACEHOLDER: 2–3 sentence testimonial from a parent about their positive experience with Geetanjali High School, mentioning the caring faculty and academic growth of their child]"
+    },
+    {
+      "id": "t2",
+      "name": "[PLACEHOLDER: alumni name]",
+      "role": "Alumni",
+      "image": "[PLACEHOLDER: testimonial photo]",
+      "quote": "[PLACEHOLDER: 2–3 sentence testimonial from an alumnus about how GHS shaped their character and prepared them for higher education]"
+    },
+    {
+      "id": "t3",
+      "name": "[PLACEHOLDER: student name]",
+      "role": "Student",
+      "image": "[PLACEHOLDER: testimonial photo]",
+      "quote": "[PLACEHOLDER: 2–3 sentence testimonial from a current student about the school environment, extracurricular activities, and support from teachers]"
+    },
+    {
+      "id": "t4",
+      "name": "[PLACEHOLDER: parent name]",
+      "role": "Parent",
+      "image": "[PLACEHOLDER: testimonial photo]",
+      "quote": "[PLACEHOLDER: 2–3 sentence testimonial from a parent praising the school's values-based education and safe campus environment]"
+    }
+  ]
+}

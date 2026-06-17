@@ -1,0 +1,36 @@
+{
+  "stats": [
+    {
+      "id": "years",
+      "label": "Years of Excellence",
+      "value": "[PLACEHOLDER: stat]",
+      "displayValue": "00",
+      "suffix": "+",
+      "icon": "Calendar"
+    },
+    {
+      "id": "students",
+      "label": "Students Enrolled",
+      "value": "[PLACEHOLDER: stat]",
+      "displayValue": "000",
+      "suffix": "+",
+      "icon": "Users"
+    },
+    {
+      "id": "faculty",
+      "label": "Dedicated Faculty",
+      "value": "[PLACEHOLDER: stat]",
+      "displayValue": "00",
+      "suffix": "+",
+      "icon": "GraduationCap"
+    },
+    {
+      "id": "results",
+      "label": "Board Exam Pass Rate",
+      "value": "[PLACEHOLDER: stat]",
+      "displayValue": "00",
+      "suffix": "%",
+      "icon": "TrendingUp"
+    }
+  ]
+}

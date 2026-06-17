@@ -1,0 +1,35 @@
+{
+  "schoolName": "Geetanjali High School, Maddur",
+  "shortName": "GHS Maddur",
+  "tagline": "Build Your Own Identity",
+  "motto": "Thought • Action • Progress",
+  "trustName": "VVM",
+  "trustFullName": "[VVM — Vijay Kumar, Venkataih & Mahesh]",
+  "trustDescription": "A VVM Group Institution",
+  "cbseAffiliation": "Pending/NA",
+  "schoolCode": "46117",
+  "contact": {
+    "phone": "9573276939",
+    "email": "geetanjalihighschool.vvm@gmail.com",
+    "website": "www.ghsmaddur.in",
+    "address": {
+      "line1": "Geetanjali High School Maddur",
+      "line2": "Narayanapet Road, Maddur",
+      "line3": "Narayanapet District, Telangana – 509411"
+    }
+  },
+  "social": {
+    "facebook": "[PLACEHOLDER: Facebook URL]",
+    "instagram": "[PLACEHOLDER: Instagram URL]",
+    "youtube": "[PLACEHOLDER: YouTube URL]",
+    "twitter": "[PLACEHOLDER: Twitter/X URL]"
+  },
+  "navLinks": [
+    { "label": "About", "href": "#about" },
+    { "label": "Academics", "href": "#academics" },
+    { "label": "Campus", "href": "#campus" },
+    { "label": "Gallery", "href": "#gallery" },
+    { "label": "Achievements", "href": "#achievements" },
+    { "label": "Contact", "href": "#contact" }
+  ]
+}

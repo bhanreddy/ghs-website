@@ -1,0 +1,17 @@
+{
+  "categories": ["All", "Events", "Sports", "Annual Day", "Classrooms", "Campus"],
+  "images": [
+    { "id": "g01", "src": "[PLACEHOLDER: gallery image 01]", "alt": "[PLACEHOLDER: annual day celebration stage performance]", "category": "Annual Day" },
+    { "id": "g02", "src": "[PLACEHOLDER: gallery image 02]", "alt": "[PLACEHOLDER: students playing cricket on school ground]", "category": "Sports" },
+    { "id": "g03", "src": "[PLACEHOLDER: gallery image 03]", "alt": "[PLACEHOLDER: Independence Day flag hoisting ceremony]", "category": "Events" },
+    { "id": "g04", "src": "[PLACEHOLDER: gallery image 04]", "alt": "[PLACEHOLDER: classroom with students during a lesson]", "category": "Classrooms" },
+    { "id": "g05", "src": "[PLACEHOLDER: gallery image 05]", "alt": "[PLACEHOLDER: aerial view of school campus]", "category": "Campus" },
+    { "id": "g06", "src": "[PLACEHOLDER: gallery image 06]", "alt": "[PLACEHOLDER: Republic Day parade and march past]", "category": "Events" },
+    { "id": "g07", "src": "[PLACEHOLDER: gallery image 07]", "alt": "[PLACEHOLDER: students in science lab conducting experiments]", "category": "Classrooms" },
+    { "id": "g08", "src": "[PLACEHOLDER: gallery image 08]", "alt": "[PLACEHOLDER: kabaddi match during sports day]", "category": "Sports" },
+    { "id": "g09", "src": "[PLACEHOLDER: gallery image 09]", "alt": "[PLACEHOLDER: annual day dance performance by students]", "category": "Annual Day" },
+    { "id": "g10", "src": "[PLACEHOLDER: gallery image 10]", "alt": "[PLACEHOLDER: school building front view with entrance]", "category": "Campus" },
+    { "id": "g11", "src": "[PLACEHOLDER: gallery image 11]", "alt": "[PLACEHOLDER: teachers' day celebration]", "category": "Events" },
+    { "id": "g12", "src": "[PLACEHOLDER: gallery image 12]", "alt": "[PLACEHOLDER: students in computer lab]", "category": "Classrooms" }
+  ]
+}

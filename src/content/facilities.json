@@ -1,0 +1,68 @@
+{
+  "facilities": [
+    {
+      "id": "science-lab",
+      "title": "Science Laboratories",
+      "description": "State-of-the-art physics, chemistry, and biology labs",
+      "icon": "FlaskConical",
+      "image": "[PLACEHOLDER: facility image — science laboratory with students conducting experiments]",
+      "size": "large"
+    },
+    {
+      "id": "library",
+      "title": "Library & Reading Room",
+      "description": "Extensive collection of books and digital resources",
+      "icon": "Library",
+      "image": "[PLACEHOLDER: facility image — well-stocked library with reading area]",
+      "size": "medium"
+    },
+    {
+      "id": "computer-lab",
+      "title": "Computer Lab",
+      "description": "Modern computing facilities with internet access",
+      "icon": "Monitor",
+      "image": "[PLACEHOLDER: facility image — computer lab with students]",
+      "size": "medium"
+    },
+    {
+      "id": "sports",
+      "title": "Sports & Athletics",
+      "description": "Playground, indoor games, and athletic training",
+      "icon": "Trophy",
+      "image": "[PLACEHOLDER: facility image — sports ground with students playing]",
+      "size": "large"
+    },
+    {
+      "id": "transport",
+      "title": "School Transport",
+      "description": "Safe and reliable bus service covering the region",
+      "icon": "Bus",
+      "image": "[PLACEHOLDER: facility image — school bus fleet]",
+      "size": "small"
+    },
+    {
+      "id": "classrooms",
+      "title": "Smart Classrooms",
+      "description": "Well-ventilated rooms with modern teaching aids",
+      "icon": "Presentation",
+      "image": "[PLACEHOLDER: facility image — smart classroom with projector]",
+      "size": "small"
+    },
+    {
+      "id": "playground",
+      "title": "Campus Grounds",
+      "description": "Spacious green campus for outdoor activities",
+      "icon": "TreePine",
+      "image": "[PLACEHOLDER: facility image — aerial view of campus grounds]",
+      "size": "medium"
+    },
+    {
+      "id": "activity-room",
+      "title": "Activity & Art Room",
+      "description": "Dedicated space for creative arts and extracurricular activities",
+      "icon": "Palette",
+      "image": "[PLACEHOLDER: facility image — students in art/activity room]",
+      "size": "small"
+    }
+  ]
+}
