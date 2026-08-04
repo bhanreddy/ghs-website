@@ -1,35 +1,40 @@
-import Header from "@/components/sections/Header";
-import Hero from "@/components/sections/Hero";
-import Leadership from "@/components/sections/Leadership";
-import AboutVVM from "@/components/sections/AboutVVM";
-import Academics from "@/components/sections/Academics";
-import Facilities from "@/components/sections/Facilities";
-import Gallery from "@/components/sections/Gallery";
-import Stats from "@/components/sections/Stats";
-import Testimonials from "@/components/sections/Testimonials";
-import Admissions from "@/components/sections/Admissions";
-import Contact from "@/components/sections/Contact";
-import Footer from "@/components/sections/Footer";
-import DiagonalDivider from "@/components/ui/DiagonalDivider";
+import SiteRuntime from "@/components/site/SiteRuntime";
+import { getWebsiteGallery } from "@/lib/websiteGallery";
+import {
+  Nav,
+  Hero,
+  Marquee,
+  VVM,
+  About,
+  Leadership,
+  Facilities,
+  Gallery,
+  Results,
+  Contact,
+  Footer,
+} from "@/components/site/Sections";
 
-export default function Home() {
+export default async function Home() {
+  const gallery = await getWebsiteGallery();
+
   return (
     <>
-      <Header />
-      <main className="flex-1">
-        <Hero />
-        <Leadership />
-        <AboutVVM />
-        <DiagonalDivider fromColor="var(--brand-surface)" toColor="var(--brand-bg)" direction="right" />
-        <Academics />
-        <Facilities />
-        <DiagonalDivider fromColor="var(--brand-surface)" toColor="var(--brand-bg)" direction="left" />
-        <Gallery />
-        <Stats />
-        <Testimonials />
-        <Admissions />
-        <Contact />
-      </main>
+      <SiteRuntime />
+      <Nav />
+      <Hero />
+      <Marquee />
+      <VVM />
+      <About />
+      <div className="ribbon"></div>
+      <Leadership />
+      <div className="ribbon"></div>
+      <Facilities />
+      <div className="ribbon"></div>
+      <Gallery images={gallery} />
+      <div className="ribbon"></div>
+      <Results />
+      <div className="ribbon"></div>
+      <Contact />
       <Footer />
     </>
   );

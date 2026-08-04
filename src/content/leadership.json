@@ -1,29 +1,32 @@
 {
   "leaders": [
     {
-      "id": "principal",
-      "name": "Vijay Kumar",
-      "title": "Principal",
+      "id": "correspondent",
+      "name": "Venkataiah",
+      "title": "Correspondent",
+      "qualification": "M.A, B. Ed",
       "initial": "V",
-      "image": "[PLACEHOLDER: portrait photo — Principal Vijay Kumar]",
-      "quote": "[PLACEHOLDER: 2–3 sentence welcome message from Principal Vijay Kumar about the school's vision for holistic education and building student identity]"
+      "image": "/Venkataiah.jpeg",
+      "quote": "Our commitment is to provide quality education that is accessible and empowering. We believe that strong foundational knowledge coupled with moral values is key to shaping responsible and capable citizens for tomorrow."
     },
     {
-      "id": "correspondent",
-      "name": "Venkataih",
-      "title": "Correspondent",
+      "id": "principal",
+      "name": "K. Vijay Kumar",
+      "title": "Principal",
+      "qualification": "M. Sc, B. Ed",
       "initial": "V",
-      "image": "[PLACEHOLDER: portrait photo — Correspondent Venkataih]",
-      "quote": "[PLACEHOLDER: 2–3 sentence message from Correspondent Venkataih about the school's commitment to quality education and community values]"
+      "image": "/Vijay-Kumar.jpeg",
+      "quote": "Education is not merely the acquisition of knowledge, but the journey of building a unique identity. At Geetanjali, we nurture young minds with value-based education, modern curriculum, and holistic environment, encouraging them to think, act, and progress."
     },
     {
       "id": "vice-principal",
-      "name": "Mahesh",
+      "name": "K. Mahesh",
       "title": "Vice Principal",
+      "qualification": "M.A, B. Ed",
       "initial": "M",
-      "image": "[PLACEHOLDER: portrait photo — Vice Principal Mahesh]",
-      "quote": "[PLACEHOLDER: 2–3 sentence message from Vice Principal Mahesh about student development and the school's nurturing environment]"
+      "image": "/Mahesh.jpeg",
+      "quote": "Discipline, creativity, and persistent effort are the pillars of student success. We strive to create a safe, supportive, and stimulating environment where every child discovers their potential and excels in their endeavors."
     }
   ],
-  "vvmDescription": "[PLACEHOLDER: 2–3 paragraphs about VVM Group — Founded by Vijay Kumar, Venkataih, and Mahesh, VVM is dedicated to providing quality education in the Maddur region. Describe the trust's mission, founding story, and commitment to educational excellence.]"
+  "vvmDescription": "VVM is an abbreviation of the partners Mr. Vijay Kumar, Mr. Venkataiah, and Mr. Mahesh, who established Geetanjali High School with a shared mission to bring high-quality education to the Maddur region. Recognizing the need for a modern, values-driven school, the partners pooled their expertise in teaching and administration to establish Geetanjali High School.\n\nOur philosophy revolves around the theme of 'Build Your Own Identity,' helping students develop strong moral fiber, critical thinking abilities, and practical skills. Through academic excellence, sports, and cultural engagement, we aim to prepare students for the global challenges of tomorrow."
 }

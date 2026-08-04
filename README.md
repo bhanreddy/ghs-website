@@ -1,6 +1,6 @@
 # Geetanjali High School, Maddur — Official Website
 
-> **Build Your Own Identity** — A VVM Group Institution
+> **Build Your Own Identity** — A VVM Partners School
 
 Premium landing website for Geetanjali High School, Maddur. Built with Next.js 16, TypeScript, Tailwind CSS v4, Framer Motion, and Lenis smooth scroll.
 
@@ -21,6 +21,20 @@ npm start
 ```
 
 The site runs at `http://localhost:3000`.
+
+## SchoolIMS gallery integration
+
+Copy `.env.example` to `.env.local` and configure:
+
+```bash
+SCHOOL_ID=17
+SCHOOLIMS_API_URL=https://your-schoolims-api.example.com/api/v1
+```
+
+The landing page reads this school's gallery from SchoolIMS. If the API is
+temporarily unavailable, the bundled `src/content/gallery.json` photos are used
+as a safe fallback. For another school website, change `SCHOOL_ID`; the gallery
+implementation stays the same.
 
 ## 🏗 Tech Stack
 
@@ -66,7 +80,7 @@ The following items need real content/assets before go-live. Each is tagged with
 |---------|------------|------|
 | Hero | Campus photo/video | `Hero.tsx` |
 | Leadership | Portrait — Principal Vijay Kumar | `leadership.json` |
-| Leadership | Portrait — Correspondent Venkataih | `leadership.json` |
+| Leadership | Portrait — Correspondent Venkataiah | `leadership.json` |
 | Leadership | Portrait — Vice Principal Mahesh | `leadership.json` |
 | About VVM | VVM logo | `AboutVVM.tsx` |
 | Facilities | 8× facility images (labs, library, etc.) | `facilities.json` |

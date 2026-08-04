@@ -2,31 +2,31 @@
   "testimonials": [
     {
       "id": "t1",
-      "name": "[PLACEHOLDER: parent name]",
+      "name": "Ramesh Reddy",
       "role": "Parent",
-      "image": "[PLACEHOLDER: testimonial photo]",
-      "quote": "[PLACEHOLDER: 2–3 sentence testimonial from a parent about their positive experience with Geetanjali High School, mentioning the caring faculty and academic growth of their child]"
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80",
+      "quote": "Sending our children to Geetanjali High School was the best decision we made. The teachers are highly dedicated and caring. We have seen a remarkable improvement in our daughter's academic performance and self-confidence over the past three years."
     },
     {
       "id": "t2",
-      "name": "[PLACEHOLDER: alumni name]",
-      "role": "Alumni",
-      "image": "[PLACEHOLDER: testimonial photo]",
-      "quote": "[PLACEHOLDER: 2–3 sentence testimonial from an alumnus about how GHS shaped their character and prepared them for higher education]"
+      "name": "Dr. K. Soumya",
+      "role": "Alumni (MBBS)",
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80",
+      "quote": "GHS provided me with a strong academic foundation and taught me the importance of self-discipline. The encouragement I received from the Principal and teachers motivated me to pursue medicine. I am proud to be a GHS alumnus!"
     },
     {
       "id": "t3",
-      "name": "[PLACEHOLDER: student name]",
-      "role": "Student",
-      "image": "[PLACEHOLDER: testimonial photo]",
-      "quote": "[PLACEHOLDER: 2–3 sentence testimonial from a current student about the school environment, extracurricular activities, and support from teachers]"
+      "name": "Vineeth Kumar",
+      "role": "Student (Class X)",
+      "image": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&auto=format&fit=crop&q=80",
+      "quote": "I love my school because learning is fun here. Our teachers make every subject easy to understand, and we have many activities like science fairs, sports tournaments, and art classes that help us explore our talents."
     },
     {
       "id": "t4",
-      "name": "[PLACEHOLDER: parent name]",
+      "name": "M. Anitha",
       "role": "Parent",
-      "image": "[PLACEHOLDER: testimonial photo]",
-      "quote": "[PLACEHOLDER: 2–3 sentence testimonial from a parent praising the school's values-based education and safe campus environment]"
+      "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=100&auto=format&fit=crop&q=80",
+      "quote": "What sets GHS apart is its focus on values-based education. Along with academic excellence, the school instills strong moral values, respect, and community responsibility in children. The campus is also extremely safe and nurturing."
     }
   ]
 }

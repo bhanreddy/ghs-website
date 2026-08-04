@@ -1,83 +1,51 @@
 import type { Metadata } from "next";
-import { Inter, Outfit, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
-import ThemeProvider from "@/components/providers/ThemeProvider";
-import CustomCursor from "@/components/ui/CustomCursor";
-import PageLoader from "@/components/ui/PageLoader";
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "900"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Geetanjali High School, Maddur — Build Your Own Identity",
   description:
-    "Geetanjali High School, Maddur is a VVM Group Institution offering quality education from Primary to Secondary level. School Code: 46117. Located in Narayanapet District, Telangana.",
-  keywords: [
-    "Geetanjali High School",
-    "GHS Maddur",
-    "VVM Group Institution",
-    "School in Maddur",
-    "CBSE School Narayanapet",
-    "Best School Telangana",
-    "School Code 46117",
-  ],
+    "Geetanjali High School, Maddur. Founded and led by VVM. Thought · Action · Progress. Narayanapet District, Telangana.",
+  icons: { icon: "/logo.png" },
   openGraph: {
-    title: "Geetanjali High School, Maddur — Build Your Own Identity",
-    description:
-      "A VVM Group Institution providing quality education. Thought • Action • Progress.",
-    url: "https://www.ghsmaddur.in",
-    siteName: "Geetanjali High School, Maddur",
-    locale: "en_IN",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
     title: "Geetanjali High School, Maddur",
-    description: "Build Your Own Identity — A VVM Group Institution",
-  },
-  robots: {
-    index: true,
-    follow: true,
+    description: "Build Your Own Identity — Founded and led by VVM, Maddur.",
+    type: "website",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} h-full`}
+      className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col antialiased">
-        <ThemeProvider>
-          <PageLoader />
-          <CustomCursor />
-          <SmoothScrollProvider>
-            {children}
-          </SmoothScrollProvider>
-        </ThemeProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

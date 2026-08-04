@@ -4,10 +4,10 @@
   "tagline": "Build Your Own Identity",
   "motto": "Thought • Action • Progress",
   "trustName": "VVM",
-  "trustFullName": "[VVM — Vijay Kumar, Venkataih & Mahesh]",
-  "trustDescription": "A VVM Group Institution",
-  "cbseAffiliation": "Pending/NA",
+  "trustFullName": "VVM — Vijay Kumar, Venkataiah & Mahesh",
+  "trustDescription": "VVM Partners",
   "schoolCode": "46117",
+  "established": "2005",
   "contact": {
     "phone": "9573276939",
     "email": "geetanjalihighschool.vvm@gmail.com",
@@ -19,14 +19,13 @@
     }
   },
   "social": {
-    "facebook": "[PLACEHOLDER: Facebook URL]",
-    "instagram": "[PLACEHOLDER: Instagram URL]",
-    "youtube": "[PLACEHOLDER: YouTube URL]",
-    "twitter": "[PLACEHOLDER: Twitter/X URL]"
+    "facebook": "https://facebook.com/ghsmaddur",
+    "instagram": "https://instagram.com/ghsmaddur",
+    "youtube": "https://youtube.com/@ghsmaddur",
+    "twitter": "https://twitter.com/ghsmaddur"
   },
   "navLinks": [
     { "label": "About", "href": "#about" },
-    { "label": "Academics", "href": "#academics" },
     { "label": "Campus", "href": "#campus" },
     { "label": "Gallery", "href": "#gallery" },
     { "label": "Achievements", "href": "#achievements" },

@@ -6,7 +6,7 @@
       "grades": "Classes I – V",
       "icon": "BookOpen",
       "color": "#F5921B",
-      "description": "[PLACEHOLDER: 2–3 sentences about the primary school program — focus on foundational learning, activity-based education, and nurturing curiosity in young minds]",
+      "description": "Our primary school program (Classes I–V) focuses on building strong foundational skills in literacy, numeracy, and social-emotional development. Through interactive, play-based, and activity-driven methods, we cultivate a lifelong love of learning and nurture the natural curiosity of children.",
       "subjects": [
         "English",
         "Mathematics",
@@ -22,7 +22,7 @@
       "grades": "Classes VI – VIII",
       "icon": "FlaskConical",
       "color": "#6B2FA0",
-      "description": "[PLACEHOLDER: 2–3 sentences about the middle school program — focus on broadening academic horizons, introducing science labs, and building critical thinking skills]",
+      "description": "The middle school program (Classes VI–VIII) broadens students' academic horizons by introducing structured sciences, advanced mathematics, and computer education. We encourage critical thinking, analytical reasoning, and hands-on laboratory experiences to foster deeper scientific inquiry.",
       "subjects": [
         "English",
         "Mathematics",
@@ -39,7 +39,7 @@
       "grades": "Classes IX – X",
       "icon": "GraduationCap",
       "color": "#F9A825",
-      "description": "[PLACEHOLDER: 2–3 sentences about the secondary program — focus on board exam preparation, career guidance, and all-round development for competitive readiness]",
+      "description": "Our secondary school program (Classes IX–X) is dedicated to rigorous academic preparation for the board examinations while developing life skills and career awareness. We place special emphasis on conceptual clarity, regular assessments, and counseling to ensure competitive readiness and holistic growth.",
       "subjects": [
         "English",
         "Mathematics",
