@@ -3,11 +3,13 @@ import { getWebsiteGallery } from "@/lib/websiteGallery";
 import {
   Nav,
   Hero,
+  SchoolApp,
   Marquee,
   VVM,
   About,
   Leadership,
   Facilities,
+  Batches,
   Gallery,
   Results,
   Contact,
@@ -22,6 +24,7 @@ export default async function Home() {
       <SiteRuntime />
       <Nav />
       <Hero />
+      <SchoolApp />
       <Marquee />
       <VVM />
       <About />
@@ -29,6 +32,8 @@ export default async function Home() {
       <Leadership />
       <div className="ribbon"></div>
       <Facilities />
+      <div className="ribbon"></div>
+      <Batches />
       <div className="ribbon"></div>
       <Gallery images={gallery} />
       <div className="ribbon"></div>

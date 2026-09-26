@@ -1,9 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 /* Presentational sections — faithful port of the source markup.
    All interactivity is wired by SiteRuntime via stable ids/classes. */
 
 import type { WebsiteGalleryPhoto } from "@/lib/websiteGallery";
 
 const LOGO = "/logo.png";
+
+export { Batches } from "./Batches";
+export { SchoolApp, PlayStoreIcon, PlayStoreButton } from "./SchoolApp";
+import { PlayStoreIcon } from "./SchoolApp";
 
 export function Nav() {
   return (
@@ -21,7 +26,9 @@ export function Nav() {
             <a href="#about" data-cursor="hover">About</a>
             <a href="#leadership" data-cursor="hover">Leadership</a>
             <a href="#facilities" data-cursor="hover">Campus</a>
+            <a href="#batches" data-cursor="hover">Batches</a>
             <a href="#gallery" data-cursor="hover">Gallery</a>
+            <a href="#app" data-cursor="hover">School App</a>
             <a href="#contact" data-cursor="hover">Contact</a>
           </div>
           <button className="burger" id="burger" aria-label="Open menu">
@@ -35,7 +42,9 @@ export function Nav() {
         <a href="#about">About</a>
         <a href="#leadership">Leadership</a>
         <a href="#facilities">Campus</a>
+        <a href="#batches">Batches</a>
         <a href="#gallery">Gallery</a>
+        <a href="#app">School App</a>
         <a href="#contact">Contact</a>
       </div>
     </>
@@ -72,6 +81,21 @@ export function Hero() {
             <div className="hero-ctas" id="heroCtas">
               <a href="#contact" className="btn btn-primary" data-cursor="hover">Admissions Open →</a>
               <a href="#gallery" className="btn btn-ghost" data-cursor="hover">Explore Campus</a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.nexsyrussims.geetanjalihighschool"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-playstore"
+                data-cursor="hover"
+                title="Download Geetanjali High School App on Google Play Store"
+                aria-label="Download Geetanjali High School App on Google Play Store"
+              >
+                <PlayStoreIcon size={22} />
+                <span className="btn-playstore-txt">
+                  <span className="t-sub">GET IT ON</span>
+                  <span className="t-main">Google Play</span>
+                </span>
+              </a>
             </div>
           </div>
           <div className="hero-crest-wrap">
@@ -262,9 +286,28 @@ export function Leadership() {
             aria-hidden="true"
           >
             <div className="leader-panel-glow" aria-hidden="true"></div>
-            <button type="button" className="leader-panel-close" id="leaderPanelClose" aria-label="Close profile">
-              <span aria-hidden="true">×</span>
-            </button>
+            <div className="leader-panel-topbar">
+              <button
+                type="button"
+                className="leader-back-btn"
+                id="leaderBackBtn"
+                aria-label="Back to all leadership profiles"
+                data-cursor="hover"
+              >
+                <span aria-hidden="true">←</span> Back to Profiles
+              </button>
+              <button
+                type="button"
+                className="leader-panel-close"
+                id="leaderPanelClose"
+                aria-label="Close profile"
+                title="Close profile and go back (Esc)"
+                data-cursor="hover"
+              >
+                <span className="close-label">Close</span>
+                <span className="close-icon" aria-hidden="true">✕</span>
+              </button>
+            </div>
 
             <div className="leader-panel-head">
               <div className="leader-panel-avatar">
@@ -292,11 +335,13 @@ export function Leadership() {
             </div>
 
             <div className="leader-panel-nav">
-              <button type="button" id="leaderPanelPrev" aria-label="Previous leadership profile">
+              <button type="button" id="leaderPanelPrev" aria-label="Previous leadership profile" data-cursor="hover">
                 <span aria-hidden="true">←</span> Previous
               </button>
-              <span className="leader-panel-navline" aria-hidden="true"></span>
-              <button type="button" id="leaderPanelNext" aria-label="Next leadership profile">
+              <button type="button" className="leader-panel-done-btn" id="leaderPanelDone" data-cursor="hover">
+                ✕ Close Profile
+              </button>
+              <button type="button" id="leaderPanelNext" aria-label="Next leadership profile" data-cursor="hover">
                 Next <span aria-hidden="true">→</span>
               </button>
             </div>
@@ -387,11 +432,19 @@ export function Gallery({ images }: { images: WebsiteGalleryPhoto[] }) {
       </section>
 
       <div className="lightbox" id="lightbox">
-        <button className="lb-x" id="lbX" aria-label="Close">✕</button>
-        <button className="lb-a p" id="lbP" aria-label="Previous">‹</button>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img id="lbImg" alt="Gallery image" />
-        <button className="lb-a n" id="lbN" aria-label="Next">›</button>
+        <div className="lb-topbar">
+          <button className="lb-back-btn" id="lbBack" aria-label="Back to Gallery" data-cursor="hover">
+            ← Back to Gallery
+          </button>
+          <button className="lb-x" id="lbX" aria-label="Close lightbox (Esc)" data-cursor="hover">
+            <span>Close</span> ✕
+          </button>
+        </div>
+        <button className="lb-a p" id="lbP" aria-label="Previous image" data-cursor="hover">‹</button>
+        <div className="lb-img-wrap" id="lbImgWrap">
+          <img id="lbImg" alt="Gallery image" />
+        </div>
+        <button className="lb-a n" id="lbN" aria-label="Next image" data-cursor="hover">›</button>
         <div className="lb-c" id="lbC">{images.length ? `1 / ${images.length}` : ""}</div>
       </div>
     </>
@@ -506,7 +559,9 @@ export function Footer() {
               <li><a href="#about">About</a></li>
               <li><a href="#leadership">Leadership</a></li>
               <li><a href="#facilities">Campus</a></li>
+              <li><a href="#batches">Batches &amp; Alumni</a></li>
               <li><a href="#gallery">Gallery</a></li>
+              <li><a href="#app">Official Mobile App</a></li>
               <li><a href="#contact">Admissions</a></li>
             </ul>
           </div>

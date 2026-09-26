@@ -30,7 +30,7 @@ const fallbackGallery: WebsiteGalleryPhoto[] = staticGallery.images.map((photo, 
   src: photo.src,
   alt: photo.alt,
   category: photo.category,
-  tall: index === 0 || index === 3,
+  tall: index === 0 || index % 5 === 3,
 }));
 
 /**

@@ -1,7 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import batchesContent from "@/content/batches.json";
 
 /**
  * SiteRuntime renders the fixed atmosphere/overlay layers and drives every
@@ -114,7 +116,7 @@ export default function SiteRuntime() {
       navMap[(a.getAttribute("href") || "").slice(1)] = a;
     });
     const sectionObservers: IntersectionObserver[] = [];
-    ["about", "leadership", "facilities", "gallery", "contact"].forEach((id) => {
+    ["app", "about", "leadership", "facilities", "batches", "gallery", "contact"].forEach((id) => {
       const s = document.getElementById(id);
       if (!s) return;
       const ob = new IntersectionObserver(
@@ -160,6 +162,8 @@ export default function SiteRuntime() {
     const leaderCards = [...document.querySelectorAll<HTMLButtonElement>("[data-leader-profile]")];
     if (leaderStage && leaderPanel && leaderCards.length) {
       const panelClose = document.getElementById("leaderPanelClose") as HTMLButtonElement | null;
+      const panelBackBtn = document.getElementById("leaderBackBtn") as HTMLButtonElement | null;
+      const panelDoneBtn = document.getElementById("leaderPanelDone") as HTMLButtonElement | null;
       const panelPrev = document.getElementById("leaderPanelPrev") as HTMLButtonElement | null;
       const panelNext = document.getElementById("leaderPanelNext") as HTMLButtonElement | null;
       const panelBackdrop = document.getElementById("leaderBackdrop");
@@ -172,7 +176,7 @@ export default function SiteRuntime() {
       const panelPhoneLink = document.getElementById("leaderPanelPhoneLink") as HTMLAnchorElement | null;
       const panelPlace = document.getElementById("leaderPanelPlace");
       const panelAnimatedParts = [...leaderPanel.querySelectorAll<HTMLElement>(
-        ".leader-panel-head,h3,.leader-panel-qualification,.leader-panel-bio,.leader-contact-grid"
+        ".leader-panel-head,h3,.leader-panel-qualification,.leader-panel-bio,.leader-contact-grid,.leader-panel-topbar"
       )];
       let activeLeader = 0;
       let leaderOpen = false;
@@ -214,12 +218,31 @@ export default function SiteRuntime() {
       };
 
       const openLeader = (index: number) => {
+        // Toggle behavior: clicking the active leader card again closes the panel
+        if (leaderOpen && activeLeader === index) {
+          closeLeader();
+          return;
+        }
+
         leaderOpen = true;
         renderLeader(index);
         leaderStage.classList.add("is-open");
         leaderPanel.setAttribute("aria-hidden", "false");
-        if (lenis) lenis.stop();
-        document.body.style.overflow = "hidden";
+
+        // Scroll the leadership section comfortably into view so headers and close buttons are never hidden behind navbar
+        const navH = 84;
+        const stageRect = leaderStage.getBoundingClientRect();
+        if (stageRect.top < navH || stageRect.top > 240) {
+          const targetY = window.scrollY + stageRect.top - navH - 16;
+          if (lenis) lenis.scrollTo(targetY, { duration: 0.5 });
+          else window.scrollTo({ top: targetY, behavior: "smooth" });
+        }
+
+        // On mobile, lock body scroll so the panel scrolls internally
+        if (window.innerWidth <= 960) {
+          if (lenis) lenis.stop();
+          document.body.style.overflow = "hidden";
+        }
         window.requestAnimationFrame(() => panelClose?.focus());
       };
 
@@ -239,9 +262,25 @@ export default function SiteRuntime() {
 
       leaderCards.forEach((card, index) => on(card, "click", () => openLeader(index)));
       if (panelClose) on(panelClose, "click", closeLeader);
+      if (panelBackBtn) on(panelBackBtn, "click", closeLeader);
+      if (panelDoneBtn) on(panelDoneBtn, "click", closeLeader);
       if (panelPrev) on(panelPrev, "click", () => renderLeader(activeLeader - 1, -1));
       if (panelNext) on(panelNext, "click", () => renderLeader(activeLeader + 1, 1));
       if (panelBackdrop) on(panelBackdrop, "click", closeLeader);
+
+      // Outside click anywhere on the page closes the panel
+      on(document, "click", (e: Event) => {
+        if (!leaderOpen) return;
+        const target = e.target as HTMLElement;
+        if (leaderPanel.contains(target)) return;
+        if (leaderCards.some((c) => c.contains(target))) return;
+        closeLeader();
+      });
+
+      // Browser back button / popstate closes the panel
+      on(window, "popstate", () => {
+        if (leaderOpen) closeLeader();
+      });
 
       on(document, "keydown", (e: Event) => {
         if (!leaderOpen) return;
@@ -339,7 +378,7 @@ export default function SiteRuntime() {
         ? Math.ceil(footer.getBoundingClientRect().bottom + window.scrollY)
         : 0;
       const totalH = Math.max(wrap.offsetHeight, document.body.scrollHeight, footerBottom);
-      const ids = ["vvm", "about", "leadership", "facilities", "gallery", "results", "contact"];
+      const ids = ["vvm", "about", "leadership", "facilities", "batches", "gallery", "results", "contact"];
       const dots = ids
         .map((id) => {
           const el = document.getElementById(id);
@@ -470,12 +509,20 @@ export default function SiteRuntime() {
         if (it) openLB(+(it.dataset.index || 0));
       });
       const lbX = document.getElementById("lbX");
+      const lbBack = document.getElementById("lbBack");
       const lbP = document.getElementById("lbP");
       const lbN = document.getElementById("lbN");
       if (lbX) on(lbX, "click", closeLB);
+      if (lbBack) on(lbBack, "click", closeLB);
       if (lbP) on(lbP, "click", () => navLB(-1));
       if (lbN) on(lbN, "click", () => navLB(1));
-      on(lb, "click", (e: Event) => { if (e.target === lb) closeLB(); });
+      on(lb, "click", (e: Event) => {
+        const t = e.target as HTMLElement;
+        if (t === lb || t.id === "lbImgWrap" || t.classList.contains("lb-topbar")) closeLB();
+      });
+      on(window, "popstate", () => {
+        if (lb.classList.contains("open")) closeLB();
+      });
       on(document, "keydown", (e: Event) => {
         if (!lb.classList.contains("open")) return;
         const ev = e as KeyboardEvent;
@@ -483,6 +530,168 @@ export default function SiteRuntime() {
         if (ev.key === "ArrowRight") navLB(1);
         if (ev.key === "ArrowLeft") navLB(-1);
       });
+    }
+
+    /* ---------- batches timeline & spotlight & zoom lightbox ---------- */
+    const batchList = batchesContent.batches;
+    const batchPills = [...document.querySelectorAll<HTMLButtonElement>(".batch-pill")];
+    const batchFilmCards = [...document.querySelectorAll<HTMLButtonElement>(".batch-film-card")];
+    const batchTimeline = document.getElementById("batchTimeline");
+    const batchStageImage = document.getElementById("batchStageImage") as HTMLImageElement | null;
+    const batchStageBadge = document.getElementById("batchStageBadge");
+    const batchStageTag = document.getElementById("batchStageTag");
+    const batchStageTitle = document.getElementById("batchStageTitle");
+    const batchStageYearTag = document.getElementById("batchStageYearTag");
+    const batchStageCaption = document.getElementById("batchStageCaption");
+    const batchStageHighlight = document.getElementById("batchStageHighlight");
+    const batchPrevBtn = document.getElementById("batchPrevBtn");
+    const batchNextBtn = document.getElementById("batchNextBtn");
+    const batchTlPrev = document.getElementById("batchTlPrev");
+    const batchTlNext = document.getElementById("batchTlNext");
+    const batchZoomTrigger = document.getElementById("batchZoomTrigger");
+    const batchOpenFullBtn = document.getElementById("batchOpenFullBtn");
+    const batchImageFrame = document.getElementById("batchImageFrame");
+
+    const batchLightbox = document.getElementById("batchLightbox");
+    const blbBackdrop = document.getElementById("blbBackdrop");
+    const blbClose = document.getElementById("blbClose");
+    const blbImg = document.getElementById("blbImg") as HTMLImageElement | null;
+    const blbCanvas = document.getElementById("blbCanvas");
+    const blbTitle = document.getElementById("blbTitle");
+    const blbCaption = document.getElementById("blbCaption");
+    const blbCounter = document.getElementById("blbCounter");
+    const blbDownloadLink = document.getElementById("blbDownloadLink") as HTMLAnchorElement | null;
+    const blbZoomBtn = document.getElementById("blbZoomBtn");
+    const blbZoomText = document.getElementById("blbZoomText");
+    const blbPrev = document.getElementById("blbPrev");
+    const blbNext = document.getElementById("blbNext");
+
+    if (batchList.length && (batchPills.length || batchFilmCards.length)) {
+      let currentBatchIndex = 0;
+      let isBatchZoomed = false;
+
+      const renderBatch = (index: number, scrollIntoView = true) => {
+        currentBatchIndex = (index + batchList.length) % batchList.length;
+        const b = batchList[currentBatchIndex];
+        if (!b) return;
+
+        batchPills.forEach((pill, idx) => {
+          const isCur = idx === currentBatchIndex;
+          pill.classList.toggle("active", isCur);
+          pill.setAttribute("aria-selected", String(isCur));
+          pill.setAttribute("tabindex", isCur ? "0" : "-1");
+          if (isCur && scrollIntoView && batchTimeline) {
+            pill.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+          }
+        });
+
+        batchFilmCards.forEach((card, idx) => {
+          const isCur = idx === currentBatchIndex;
+          card.classList.toggle("active", isCur);
+          if (isCur && scrollIntoView) {
+            card.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+          }
+        });
+
+        if (batchStageImage) {
+          batchStageImage.classList.add("cross-fade");
+          setTimeout(() => {
+            batchStageImage.src = b.image;
+            batchStageImage.alt = b.title;
+            batchStageImage.classList.remove("cross-fade");
+          }, 100);
+        }
+        if (batchStageBadge) batchStageBadge.textContent = b.badge;
+        if (batchStageTag) batchStageTag.textContent = b.tag;
+        if (batchStageTitle) batchStageTitle.textContent = b.title;
+        if (batchStageYearTag) batchStageYearTag.textContent = `Academic Year ${b.year}`;
+        if (batchStageCaption) batchStageCaption.textContent = b.caption;
+        if (batchStageHighlight) batchStageHighlight.textContent = b.studentsHighlight;
+
+        if (blbImg) blbImg.src = b.image;
+        if (blbTitle) blbTitle.textContent = b.title;
+        if (blbCaption) blbCaption.textContent = b.caption;
+        if (blbCounter) blbCounter.textContent = `Batch ${currentBatchIndex + 1} of ${batchList.length}`;
+        if (blbDownloadLink) {
+          blbDownloadLink.href = b.original;
+          blbDownloadLink.setAttribute("download", `${b.title.replace(/[^a-zA-Z0-9_-]/g, "_")}.jpeg`);
+        }
+      };
+
+      const openBatchModal = (index?: number) => {
+        if (typeof index === "number") renderBatch(index, true);
+        isBatchZoomed = false;
+        if (blbCanvas) blbCanvas.classList.remove("is-zoomed");
+        if (blbZoomText) blbZoomText.textContent = "Zoom 2x";
+        if (batchLightbox) {
+          batchLightbox.classList.add("open");
+          batchLightbox.setAttribute("aria-hidden", "false");
+        }
+        if (lenis) lenis.stop();
+        document.body.style.overflow = "hidden";
+      };
+
+      const closeBatchModal = () => {
+        isBatchZoomed = false;
+        if (blbCanvas) blbCanvas.classList.remove("is-zoomed");
+        if (batchLightbox) {
+          batchLightbox.classList.remove("open");
+          batchLightbox.setAttribute("aria-hidden", "true");
+        }
+        if (lenis) lenis.start();
+        document.body.style.overflow = "";
+      };
+
+      const toggleBatchZoom = () => {
+        isBatchZoomed = !isBatchZoomed;
+        if (blbCanvas) blbCanvas.classList.toggle("is-zoomed", isBatchZoomed);
+        if (blbZoomText) blbZoomText.textContent = isBatchZoomed ? "Zoom 1x" : "Zoom 2x";
+      };
+
+      batchPills.forEach((pill) => {
+        on(pill, "click", () => renderBatch(+(pill.dataset.batchIndex || 0)));
+      });
+
+      batchFilmCards.forEach((card) => {
+        on(card, "click", () => renderBatch(+(card.dataset.batchIndex || 0)));
+      });
+
+      if (batchPrevBtn) on(batchPrevBtn, "click", () => renderBatch(currentBatchIndex - 1));
+      if (batchNextBtn) on(batchNextBtn, "click", () => renderBatch(currentBatchIndex + 1));
+
+      if (batchTlPrev && batchTimeline) {
+        on(batchTlPrev, "click", () => batchTimeline.scrollBy({ left: -220, behavior: "smooth" }));
+      }
+      if (batchTlNext && batchTimeline) {
+        on(batchTlNext, "click", () => batchTimeline.scrollBy({ left: 220, behavior: "smooth" }));
+      }
+
+      if (batchZoomTrigger) on(batchZoomTrigger, "click", () => openBatchModal());
+      if (batchOpenFullBtn) on(batchOpenFullBtn, "click", () => openBatchModal());
+      if (batchImageFrame) on(batchImageFrame, "dblclick", () => openBatchModal());
+
+      const blbBackBtn = document.getElementById("blbBackBtn");
+      if (blbBackBtn) on(blbBackBtn, "click", closeBatchModal);
+      if (blbClose) on(blbClose, "click", closeBatchModal);
+      if (blbBackdrop) on(blbBackdrop, "click", closeBatchModal);
+      if (blbZoomBtn) on(blbZoomBtn, "click", toggleBatchZoom);
+      if (blbCanvas) on(blbCanvas, "click", toggleBatchZoom);
+      if (blbPrev) on(blbPrev, "click", () => renderBatch(currentBatchIndex - 1));
+      if (blbNext) on(blbNext, "click", () => renderBatch(currentBatchIndex + 1));
+      on(window, "popstate", () => {
+        if (batchLightbox?.classList.contains("open")) closeBatchModal();
+      });
+
+      on(document, "keydown", (e: Event) => {
+        if (!batchLightbox?.classList.contains("open")) return;
+        const ev = e as KeyboardEvent;
+        if (ev.key === "Escape") closeBatchModal();
+        if (ev.key === "ArrowLeft") renderBatch(currentBatchIndex - 1);
+        if (ev.key === "ArrowRight") renderBatch(currentBatchIndex + 1);
+        if (ev.key === "z" || ev.key === "Z") toggleBatchZoom();
+      });
+
+      cleanups.push(() => closeBatchModal());
     }
 
     /* ---------- result counters ---------- */

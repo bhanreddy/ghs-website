@@ -1,10 +1,15 @@
 {
-  "categories": ["All", "Events", "Campus"],
+  "categories": ["All", "Batches", "Events", "Campus"],
   "images": [
     { "id": "g01", "src": "/campus-building.png", "alt": "Geetanjali High School main building", "category": "Campus" },
+    { "id": "b26", "src": "/batches/2025-2026.jpg", "alt": "SSC Class of 2025–26 batch photo", "category": "Batches" },
     { "id": "g02", "src": "/bathukamma_ground.png", "alt": "Bathukamma dance celebration on campus", "category": "Events" },
+    { "id": "b25", "src": "/batches/2024-2025.jpg", "alt": "SSC Class of 2024–25 batch photo", "category": "Batches" },
     { "id": "g03", "src": "/campus-aerial-1.png", "alt": "Aerial view of the Maddur campus", "category": "Campus" },
+    { "id": "b24", "src": "/batches/2023-2024.jpg", "alt": "SSC Class of 2023–24 batch photo", "category": "Batches" },
     { "id": "g04", "src": "/bathukamma-celebration.png", "alt": "Bathukamma Samburalu group photo", "category": "Events" },
-    { "id": "g05", "src": "/campus-aerial-2.png", "alt": "School buildings and courtyard from above", "category": "Campus" }
+    { "id": "b23", "src": "/batches/2022-2023.jpg", "alt": "SSC Class of 2022–23 batch photo", "category": "Batches" },
+    { "id": "g05", "src": "/campus-aerial-2.png", "alt": "School buildings and courtyard from above", "category": "Campus" },
+    { "id": "b14", "src": "/batches/2013-2014.jpg", "alt": "SSC Class of 2013–14 archival pioneer batch", "category": "Batches" }
   ]
 }
